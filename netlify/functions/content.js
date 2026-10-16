@@ -64,7 +64,9 @@ exports.handler = async (event) => {
         ['main']
       );
 
-      if (result.rows.length > 0) {
+      // An empty object means the row was seeded but never saved from the admin panel
+      const row = result.rows[0];
+      if (row && row.data && Object.keys(row.data).length > 0) {
         return {
           statusCode: 200,
           headers,
@@ -72,8 +74,15 @@ exports.handler = async (event) => {
         };
       }
 
-      // If table is newly created / empty, seed with default content
+      // If table is newly created / empty, serve default content
       const defaultData = getDefaultContent() || {};
+      if (row) {
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify(defaultData)
+        };
+      }
       await client.query(
         'INSERT INTO portfolio_content (id, data, updated_at) VALUES ($1, $2, NOW()) ON CONFLICT (id) DO NOTHING',
         ['main', JSON.stringify(defaultData)]
