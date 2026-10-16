@@ -1,33 +1,50 @@
-const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
-let pool;
+let Pool;
+let loadPgError = null;
+try {
+  Pool = require('pg').Pool;
+} catch (err) {
+  loadPgError = err.message;
+  console.error('Failed to require pg:', err);
+}
+
+let pool = null;
+
+function getConnectionString() {
+  const env = process.env;
+  return (
+    env.NETLIFY_DATABASE_URL ||
+    env.DATABASE_URL ||
+    env.POSTGRES_URL ||
+    env.NETLIFY_DB_URL ||
+    env.POSTGRES_PRISMA_URL ||
+    env.POSTGRES_URL_NON_POOLING ||
+    env.NETLIFY_POSTGRES_URL ||
+    env.NEON_DATABASE_URL ||
+    (env.PGHOST && `postgres://${env.PGUSER}:${env.PGPASSWORD}@${env.PGHOST}:${env.PGPORT || 5432}/${env.PGDATABASE}`)
+  );
+}
 
 function getPool() {
-  if (!pool) {
-    const env = process.env;
-    const connectionString =
-      env.NETLIFY_DATABASE_URL ||
-      env.DATABASE_URL ||
-      env.POSTGRES_URL ||
-      env.NETLIFY_DB_URL ||
-      env.POSTGRES_PRISMA_URL ||
-      env.POSTGRES_URL_NON_POOLING ||
-      env.NETLIFY_POSTGRES_URL ||
-      env.NEON_DATABASE_URL ||
-      (env.PGHOST && `postgres://${env.PGUSER}:${env.PGPASSWORD}@${env.PGHOST}:${env.PGPORT || 5432}/${env.PGDATABASE}`);
+  if (!Pool) {
+    throw new Error(`Модуль драйвера базы данных (pg) не загружен: ${loadPgError || 'require failed'}. Убедитесь, что 'npm install' выполнен при сборке.`);
+  }
 
+  if (!pool) {
+    const connectionString = getConnectionString();
     if (!connectionString) {
-      const matchingKeys = Object.keys(env).filter(k => /DATA|POSTGRES|NETLIFY|PG/i.test(k)).join(', ');
-      throw new Error(`Database connection string is missing. Matching env vars: [${matchingKeys || 'none'}]. Please ensure Netlify Database is connected in Netlify Dashboard.`);
+      const envKeys = Object.keys(process.env).filter(k => /DATA|POSTGRES|NETLIFY|PG/i.test(k)).join(', ');
+      throw new Error(`Отсутствует строка подключения к БД (DATABASE_URL / NETLIFY_DATABASE_URL). Найденные переменные: [${envKeys || 'нет'}].`);
     }
 
     pool = new Pool({
       connectionString,
       ssl: {
         rejectUnauthorized: false
-      }
+      },
+      connectionTimeoutMillis: 5000
     });
   }
   return pool;
@@ -86,7 +103,7 @@ exports.handler = async (event) => {
         };
       }
 
-      // If empty or newly seeded, serve default content
+      // If empty, serve default content
       const defaultData = getDefaultContent() || {};
       if (row) {
         return {
@@ -125,7 +142,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ success: true, message: 'Saved successfully to Netlify Database' })
+        body: JSON.stringify({ success: true, message: 'Saved successfully' })
       };
     }
 
@@ -154,7 +171,7 @@ exports.handler = async (event) => {
       headers,
       body: JSON.stringify({
         error: error.message || 'Database error',
-        hint: 'Check Netlify Database connection'
+        hint: 'Проверьте логи в Netlify: Logs -> Functions -> content'
       })
     };
   }
