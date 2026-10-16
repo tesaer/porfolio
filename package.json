@@ -1,0 +1,12 @@
+{
+  "name": "portfolio-site",
+  "version": "1.0.0",
+  "description": "Personal Portfolio with Netlify Serverless CMS & Database",
+  "main": "index.html",
+  "scripts": {
+    "start": "python server.py"
+  },
+  "dependencies": {
+    "pg": "^8.13.1"
+  }
+}

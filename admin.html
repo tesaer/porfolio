@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Panel — Portfolio</title>
+  <meta name="robots" content="noindex,nofollow"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="admin.css"/>
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <div id="login-screen" class="login-screen">
+    <div class="login-card">
+      <div class="login-card__header">
+        <span class="login-card__logo">АМ</span>
+        <h1 class="login-card__title">Admin Panel</h1>
+        <p class="login-card__sub">Portfolio CMS</p>
+      </div>
+      <form id="login-form" class="login-form" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="admin-pass">Пароль</label>
+          <input type="password" id="admin-pass" class="form-input" placeholder="••••••••" autocomplete="current-password" required/>
+        </div>
+        <div id="login-error" class="login-error" role="alert" aria-live="polite"></div>
+        <button type="submit" class="btn btn--primary btn--full">Войти</button>
+      </form>
+      <p class="login-hint mono">По умолчанию: <code>admin123</code><br/>Измените в <code>admin.js</code></p>
+    </div>
+  </div>
+
+  <!-- ADMIN LAYOUT -->
+  <div id="admin-app" class="admin-app" hidden>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar__brand">
+        <span class="sidebar__logo">АМ</span>
+        <div>
+          <div class="sidebar__name">Admin Panel</div>
+          <div class="sidebar__version mono">v2.0</div>
+        </div>
+      </div>
+
+      <nav class="sidebar__nav">
+        <button class="nav-item nav-item--active" data-tab="profile">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+          Профиль
+        </button>
+        <button class="nav-item" data-tab="skills">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          Навыки
+        </button>
+        <button class="nav-item" data-tab="projects">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          Проекты
+        </button>
+        <button class="nav-item" data-tab="pricing">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 100 7h5a3.5 3.5 0 110 7H6"/></svg>
+          Конструктор цен
+        </button>
+        <button class="nav-item" data-tab="contacts">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Контакты
+        </button>
+      </nav>
+
+      <div class="sidebar__footer">
+        <a href="/" target="_blank" class="sidebar__link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+          Открыть сайт
+        </a>
+        <button class="sidebar__link" id="logout-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
+          Выйти
+        </button>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="admin-main">
+      <div class="admin-topbar">
+        <div id="tab-title" class="admin-topbar__title">Профиль</div>
+        <div class="admin-topbar__actions">
+          <div id="save-status" class="save-status" role="status" aria-live="polite"></div>
+          <button class="btn btn--primary" id="save-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            Сохранить
+          </button>
+        </div>
+      </div>
+
+      <!-- ─── TAB: PROFILE ─── -->
+      <div id="tab-profile" class="tab-content tab-content--active">
+        <div class="panel-grid panel-grid--2">
+          <div class="panel">
+            <h2 class="panel__title">Основное</h2>
+            <div class="form-group">
+              <label class="form-label" for="p-monogram">Монограмма</label>
+              <input type="text" id="p-monogram" class="form-input" maxlength="3" placeholder="АМ"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-name">Имя (EN)</label>
+              <input type="text" id="p-name" class="form-input" placeholder="Aleksandr M."/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-status">Статус (бейдж «available»)</label>
+              <input type="text" id="p-status" class="form-input" placeholder="Open to projects & internships"/>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel__title">Hero-секция</h2>
+            <div class="form-group">
+              <label class="form-label" for="p-role">Роль (заголовок Hero)</label>
+              <input type="text" id="p-role" class="form-input" placeholder="Архитектор решений на стыке бизнеса и технологий"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-roleAccent">Акцентная часть заголовка (выделяется цветом)</label>
+              <input type="text" id="p-roleAccent" class="form-input" placeholder="бизнеса и технологий"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-subtitle">Подзаголовок Hero</label>
+              <textarea id="p-subtitle" class="form-input form-textarea" rows="2" placeholder="Product Management · Pre-Sale..."></textarea>
+            </div>
+          </div>
+
+          <div class="panel panel--full">
+            <h2 class="panel__title">Образование</h2>
+            <div class="panel-grid panel-grid--3">
+              <div class="form-group">
+                <label class="form-label" for="p-university">Университет</label>
+                <input type="text" id="p-university" class="form-input" placeholder="МИРЭА / НИУ ВШЭ"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="p-program">Программа</label>
+                <input type="text" id="p-program" class="form-input" placeholder="Бизнес-информатика, бакалавриат"/>
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="p-graduation">Год выпуска</label>
+                <input type="text" id="p-graduation" class="form-input" placeholder="2026"/>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel panel--full">
+            <h2 class="panel__title">Биография (секция About)</h2>
+            <div class="form-group">
+              <label class="form-label" for="p-bio1">Первый абзац</label>
+              <textarea id="p-bio1" class="form-input form-textarea" rows="3"></textarea>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="p-bio2">Второй абзац</label>
+              <textarea id="p-bio2" class="form-input form-textarea" rows="3"></textarea>
+            </div>
+          </div>
+
+          <div class="panel panel--full">
+            <h2 class="panel__title">Hero-пилюли (стек)</h2>
+            <p class="panel__hint">Через запятую. Пример: BPMN 2.0, UML, Python</p>
+            <div class="form-group">
+              <label class="form-label" for="p-heroStack">Теги</label>
+              <input type="text" id="p-heroStack" class="form-input" placeholder="BPMN 2.0, UML, Zero Trust, RAG / LLM, Python, SQL"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── TAB: SKILLS ─── -->
+      <div id="tab-skills" class="tab-content">
+        <div class="panel">
+          <h2 class="panel__title">Навыки</h2>
+          <p class="panel__hint">Нажмите на тег чтобы удалить. Добавьте новый ниже.</p>
+          <div id="skills-tags-container" class="tags-container" aria-label="Список навыков"></div>
+          <div class="add-skill-row">
+            <input type="text" id="new-skill-name" class="form-input" placeholder="Название навыка" style="flex:1"/>
+            <select id="new-skill-cat" class="form-input form-select" style="width:160px">
+              <option value="ba">Бизнес-анализ</option>
+              <option value="arch">Архитектура</option>
+              <option value="sec">ИБ &amp; Сети</option>
+              <option value="ai">AI / LLM</option>
+              <option value="dev">Dev &amp; Data</option>
+            </select>
+            <button class="btn btn--primary" id="add-skill-btn">Добавить</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── TAB: PROJECTS ─── -->
+      <div id="tab-projects" class="tab-content">
+        <div class="panel-toolbar">
+          <button class="btn btn--primary" id="add-project-btn">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Новый проект
+          </button>
+        </div>
+        <div id="projects-list" class="projects-list"></div>
+      </div>
+
+      <!-- ─── TAB: PRICING ─── -->
+      <div id="tab-pricing" class="tab-content">
+        <div class="panel-grid panel-grid--2">
+          <div class="panel">
+            <h2 class="panel__title">Базовые ставки по направлению</h2>
+            <p class="panel__hint">В рублях. Для консультации — почасовая ставка.</p>
+            <div class="form-group">
+              <label class="form-label" for="pr-audit">IT-аудит &amp; Security Review (₽)</label>
+              <input type="number" id="pr-audit" class="form-input" min="0" step="500"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pr-architecture">Pre-Sale Architecture Design (₽)</label>
+              <input type="number" id="pr-architecture" class="form-input" min="0" step="500"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pr-consulting">Консультация / Менторинг (₽/ч)</label>
+              <input type="number" id="pr-consulting" class="form-input" min="0" step="100"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pr-product">Продуктовое управление (₽)</label>
+              <input type="number" id="pr-product" class="form-input" min="0" step="500"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pr-ai">AI/LLM-разработка (₽)</label>
+              <input type="number" id="pr-ai" class="form-input" min="0" step="500"/>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h2 class="panel__title">Стоимость артефактов</h2>
+            <div class="form-group">
+              <label class="form-label" for="pd-report">Технический отчёт (₽)</label>
+              <input type="number" id="pd-report" class="form-input" min="0" step="100"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pd-presentation">Презентация (₽)</label>
+              <input type="number" id="pd-presentation" class="form-input" min="0" step="100"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pd-diagrams">Архитектурные схемы (₽)</label>
+              <input type="number" id="pd-diagrams" class="form-input" min="0" step="100"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pd-prototype">Прототип / PoC (₽)</label>
+              <input type="number" id="pd-prototype" class="form-input" min="0" step="500"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pd-recommendations">Рекомендации (₽)</label>
+              <input type="number" id="pd-recommendations" class="form-input" min="0" step="100"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="pd-support">Постпроектное сопровождение (₽)</label>
+              <input type="number" id="pd-support" class="form-input" min="0" step="500"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ─── TAB: CONTACTS ─── -->
+      <div id="tab-contacts" class="tab-content">
+        <div class="panel">
+          <h2 class="panel__title">Контактные данные</h2>
+          <p class="panel__hint">Только логин/имя пользователя (без https://)</p>
+          <div class="panel-grid panel-grid--2">
+            <div class="form-group">
+              <label class="form-label" for="c-telegram">Telegram (@username без @)</label>
+              <input type="text" id="c-telegram" class="form-input" placeholder="yourusername"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-email">Email</label>
+              <input type="email" id="c-email" class="form-input" placeholder="your@email.com"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-linkedin">LinkedIn (username)</label>
+              <input type="text" id="c-linkedin" class="form-input" placeholder="yourusername"/>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="c-github">GitHub (username)</label>
+              <input type="text" id="c-github" class="form-input" placeholder="yourusername"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- PROJECT MODAL -->
+  <div id="project-modal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-heading" hidden>
+    <div class="modal__backdrop"></div>
+    <div class="modal__card">
+      <div class="modal__header">
+        <h2 class="modal__title" id="modal-heading">Проект</h2>
+        <button class="modal__close" id="modal-close-btn" aria-label="Закрыть">✕</button>
+      </div>
+      <div class="modal__body">
+        <input type="hidden" id="modal-project-id"/>
+        <div class="panel-grid panel-grid--2">
+          <div class="form-group panel--full" style="grid-column:1/-1">
+            <label class="form-label" for="m-title">Заголовок проекта</label>
+            <input type="text" id="m-title" class="form-input"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m-problem">Бизнес-задача</label>
+            <textarea id="m-problem" class="form-input form-textarea" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m-description">Описание решения</label>
+            <textarea id="m-description" class="form-input form-textarea" rows="2"></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m-stack">Стек (через запятую)</label>
+            <input type="text" id="m-stack" class="form-input" placeholder="Python, LangChain, FastAPI"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m-github">GitHub URL</label>
+            <input type="url" id="m-github" class="form-input" placeholder="https://github.com/..."/>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m-demo">Demo URL (опционально)</label>
+            <input type="url" id="m-demo" class="form-input" placeholder="https://..."/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Метрики (до 3 штук)</label>
+            <div id="metrics-list" class="metrics-list"></div>
+            <button class="btn btn--outline btn--sm" id="add-metric-btn" style="margin-top:8px">+ Добавить метрику</button>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="m-featured">
+              <input type="checkbox" id="m-featured" style="margin-right:6px"/>
+              Featured (на всю ширину, первый)
+            </label>
+          </div>
+        </div>
+      </div>
+      <div class="modal__footer">
+        <button class="btn btn--danger" id="modal-delete-btn">Удалить проект</button>
+        <div style="display:flex;gap:8px">
+          <button class="btn btn--outline" id="modal-cancel-btn">Отмена</button>
+          <button class="btn btn--primary" id="modal-save-btn">Сохранить проект</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

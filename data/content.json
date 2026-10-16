@@ -1,0 +1,328 @@
+{
+  "profile": {
+    "monogram": "Jey",
+    "name": "Aleksandr D",
+    "role": "Архитектор решений на стыке бизнеса и технологий",
+    "roleAccent": "бизнеса и технологий",
+    "subtitle": "Product Management · Pre-Sale Solutions Architecture\nInformation Security · AI/LLM Engineering",
+    "status": "Open to projects & internships",
+    "heroStack": [
+      "BPMN 2.0",
+      "UML",
+      "Zero Trust",
+      "RAG / LLM",
+      "Python",
+      "SQL"
+    ],
+    "university": "МИРЭА / НИУ ВШЭ",
+    "program": "Бизнес-информатика, бакалавриат",
+    "graduation": "2026",
+    "bio1": "Студент программы «Бизнес-информатика», специализирующийся на проектировании IT-решений для реального бизнеса. Умею переводить задачи бизнеса в технические архитектуры и обратно — делая системы понятными как для CTO, так и для продуктового менеджера.",
+    "bio2": "Мой подход — исследовать проблему количественно (метрики, модели), декомпозировать её структурно (BPMN, UML, C4) и предложить безопасное, масштабируемое решение с чётким ROI."
+  },
+  "contacts": {
+    "telegram": "@teayum",
+    "email": "your@email.com",
+    "linkedin": "yourusername",
+    "github": "yourusername"
+  },
+  "skills": [
+    {
+      "name": "BPMN 2.0",
+      "category": "ba"
+    },
+    {
+      "name": "UML",
+      "category": "ba"
+    },
+    {
+      "name": "CustDev",
+      "category": "ba"
+    },
+    {
+      "name": "Jobs-to-be-Done",
+      "category": "ba"
+    },
+    {
+      "name": "OKR",
+      "category": "ba"
+    },
+    {
+      "name": "User Story Mapping",
+      "category": "ba"
+    },
+    {
+      "name": "Product Metrics",
+      "category": "ba"
+    },
+    {
+      "name": "Roadmap Planning",
+      "category": "ba"
+    },
+    {
+      "name": "Miro / Figma",
+      "category": "ba"
+    },
+    {
+      "name": "Notion",
+      "category": "ba"
+    },
+    {
+      "name": "C4 Model",
+      "category": "arch"
+    },
+    {
+      "name": "API-first Design",
+      "category": "arch"
+    },
+    {
+      "name": "Microservices",
+      "category": "arch"
+    },
+    {
+      "name": "REST / GraphQL",
+      "category": "arch"
+    },
+    {
+      "name": "Pre-Sale Architecture",
+      "category": "arch"
+    },
+    {
+      "name": "Enterprise Architecture",
+      "category": "arch"
+    },
+    {
+      "name": "Docker / K8s",
+      "category": "arch"
+    },
+    {
+      "name": "Event-Driven",
+      "category": "arch"
+    },
+    {
+      "name": "Zero Trust",
+      "category": "sec"
+    },
+    {
+      "name": "STRIDE",
+      "category": "sec"
+    },
+    {
+      "name": "MITRE ATT&CK",
+      "category": "sec"
+    },
+    {
+      "name": "Network Security",
+      "category": "sec"
+    },
+    {
+      "name": "PKI / TLS",
+      "category": "sec"
+    },
+    {
+      "name": "SIEM",
+      "category": "sec"
+    },
+    {
+      "name": "Pentest Basics",
+      "category": "sec"
+    },
+    {
+      "name": "ISO 27001",
+      "category": "sec"
+    },
+    {
+      "name": "RAG Pipelines",
+      "category": "ai"
+    },
+    {
+      "name": "LangChain",
+      "category": "ai"
+    },
+    {
+      "name": "Prompt Engineering",
+      "category": "ai"
+    },
+    {
+      "name": "Fine-tuning",
+      "category": "ai"
+    },
+    {
+      "name": "Embeddings",
+      "category": "ai"
+    },
+    {
+      "name": "OpenAI API",
+      "category": "ai"
+    },
+    {
+      "name": "Vector DB",
+      "category": "ai"
+    },
+    {
+      "name": "Python",
+      "category": "dev"
+    },
+    {
+      "name": "SQL / PostgreSQL",
+      "category": "dev"
+    },
+    {
+      "name": "FastAPI",
+      "category": "dev"
+    },
+    {
+      "name": "Git / GitHub",
+      "category": "dev"
+    },
+    {
+      "name": "Pandas / NumPy",
+      "category": "dev"
+    },
+    {
+      "name": "Linux CLI",
+      "category": "dev"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "featured": true,
+      "title": "Zero Trust Network Architecture для финтех-стартапа",
+      "tags": [
+        {
+          "label": "Architecture",
+          "color": "burgundy"
+        },
+        {
+          "label": "InfoSec",
+          "color": "default"
+        }
+      ],
+      "problem": "Снизить риск утечки данных при переходе на удалённую работу без замедления CI/CD пайплайнов.",
+      "description": "Разработал референсную архитектуру Zero Trust с сегментацией по принципу least privilege, внедрил mTLS между микросервисами, провёл threat modeling по STRIDE.",
+      "metrics": [
+        {
+          "value": "↓ 73%",
+          "label": "attack surface"
+        },
+        {
+          "value": "0 ms",
+          "label": "latency overhead"
+        },
+        {
+          "value": "ISO 27001",
+          "label": "compliance ready"
+        }
+      ],
+      "stack": [
+        "Zero Trust",
+        "mTLS",
+        "STRIDE",
+        "K8s",
+        "Istio"
+      ],
+      "github": "#",
+      "demo": ""
+    },
+    {
+      "id": 2,
+      "featured": false,
+      "title": "RAG-система для корпоративной базы знаний",
+      "tags": [
+        {
+          "label": "AI/LLM",
+          "color": "olive"
+        },
+        {
+          "label": "Product",
+          "color": "default"
+        }
+      ],
+      "problem": "Сократить время поиска ответа в регламентах компании с 20 минут до <30 секунд.",
+      "description": "Разработал RAG-пайплайн на LangChain + Chroma, применил семантическую разбивку документов, настроил re-ranking и hybrid-retrieval.",
+      "metrics": [
+        {
+          "value": "↓ 96%",
+          "label": "время поиска"
+        },
+        {
+          "value": "87%",
+          "label": "точность ответов"
+        }
+      ],
+      "stack": [
+        "Python",
+        "LangChain",
+        "ChromaDB",
+        "FastAPI",
+        "OpenAI"
+      ],
+      "github": "#",
+      "demo": ""
+    },
+    {
+      "id": 3,
+      "featured": false,
+      "title": "Цифровизация onboarding-процесса: BPMN-аудит и автоматизация",
+      "tags": [
+        {
+          "label": "Product",
+          "color": "olive"
+        },
+        {
+          "label": "BPMN",
+          "color": "default"
+        }
+      ],
+      "problem": "Снизить время адаптации нового сотрудника с 3 недель до 5 дней.",
+      "description": "Провёл as-is анализ 14 процессов через интервью, построил BPMN-карты, определил узкие места, разработал to-be процессы с автоматизацией через no-code платформу.",
+      "metrics": [
+        {
+          "value": "↓ 65%",
+          "label": "время онбординга"
+        },
+        {
+          "value": "14 → 6",
+          "label": "ручных шагов"
+        }
+      ],
+      "stack": [
+        "BPMN 2.0",
+        "Camunda",
+        "CustDev",
+        "Notion API"
+      ],
+      "github": "#",
+      "demo": ""
+    }
+  ],
+  "pricing": {
+    "baseRates": {
+      "audit": 120000,
+      "architecture": 200000,
+      "consulting": 25000,
+      "product": 150000,
+      "ai": 110000
+    },
+    "scopeMultipliers": {
+      "small": 1,
+      "medium": 1.8,
+      "large": 3.2,
+      "enterprise": 5.5
+    },
+    "deliverablesCosts": {
+      "report": 30000,
+      "presentation": 20000,
+      "diagrams": 35000,
+      "prototype": 80000,
+      "recommendations": 20000,
+      "support": 50000
+    },
+    "timelineMultipliers": {
+      "urgent": 1.8,
+      "standard": 1,
+      "flexible": 0.85
+    }
+  }
+}

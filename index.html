@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aleksandr — Solutions Architect & Product Manager</title>
+  <meta name="description" content="Персональный сайт специалиста на стыке бизнес-информатики, продуктового управления, Pre-Sale Solutions Architecture и информационной безопасности." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header" id="header">
+    <div class="header__inner container">
+      <a href="#hero" class="logo" aria-label="На главную">
+        <span class="logo__monogram" id="logo-monogram">АМ</span>
+        <span class="logo__dot" title="Open to projects"></span>
+      </a>
+      <nav class="nav" id="nav" aria-label="Основная навигация">
+        <a href="#about"    class="nav__link">Обо мне</a>
+        <a href="#skills"   class="nav__link">Core Stack</a>
+        <a href="#portfolio" class="nav__link">Проекты</a>
+        <a href="#services" class="nav__link">Услуги</a>
+        <a href="#contact"  class="nav__link">Контакты</a>
+      </nav>
+      <div class="header__actions">
+        <a href="#" class="btn btn--primary btn--sm" id="header-tg-btn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+          Telegram
+        </a>
+        <button class="burger" id="burger" aria-label="Меню" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="mobile-nav" id="mobileNav" aria-hidden="true">
+    <div class="mobile-nav__links">
+      <a href="#about"    class="mobile-nav__link">Обо мне</a>
+      <a href="#skills"   class="mobile-nav__link">Core Stack</a>
+      <a href="#portfolio" class="mobile-nav__link">Проекты</a>
+      <a href="#services" class="mobile-nav__link">Услуги</a>
+      <a href="#contact"  class="mobile-nav__link">Контакты</a>
+    </div>
+    <a href="#" class="btn btn--primary" id="mobile-tg-btn" style="margin-top:16px">Telegram</a>
+  </div>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero" id="hero">
+      <div class="hero__bg-grid" aria-hidden="true"></div>
+      <div class="container hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge-row">
+            <span class="badge badge--green" id="hero-status-badge">
+              <span class="badge__dot"></span>
+              <span id="hero-status-text">Open to projects &amp; internships</span>
+            </span>
+            <span class="badge badge--mono" id="hero-edu-badge">BSc Business Informatics · 2026</span>
+          </div>
+          <h1 class="hero__title" id="hero-title-el">
+            Архитектор решений<br/>
+            <span class="hero__title-accent" id="hero-title-accent">на стыке бизнеса<br/>и технологий</span>
+          </h1>
+          <p class="hero__subtitle" id="hero-subtitle-el">
+            Product Management · Pre-Sale Solutions Architecture<br/>Information Security · AI/LLM Engineering
+          </p>
+          <div class="hero__stack-pills" id="hero-stack-pills"></div>
+          <div class="hero__cta-group">
+            <a href="#portfolio" class="btn btn--primary btn--lg">
+              Смотреть кейсы
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="#services" class="btn btn--outline btn--lg">
+              Рассчитать стоимость
+            </a>
+          </div>
+        </div>
+
+        <div class="hero__visual" aria-hidden="true">
+          <div class="terminal-card">
+            <div class="terminal-card__header">
+              <span class="terminal-dot terminal-dot--red"></span>
+              <span class="terminal-dot terminal-dot--yellow"></span>
+              <span class="terminal-dot terminal-dot--green"></span>
+              <span class="terminal-card__title">profile.json</span>
+            </div>
+            <pre class="terminal-card__body"><code id="terminal-code"><span class="tc-brace">{</span>
+  <span class="tc-key">"name"</span>:     <span class="tc-str">"Aleksandr M."</span>,
+  <span class="tc-key">"role"</span>:     <span class="tc-str">"Solutions Architect"</span>,
+  <span class="tc-key">"focus"</span>: [
+    <span class="tc-str">"Product Management"</span>,
+    <span class="tc-str">"Pre-Sale Architecture"</span>,
+    <span class="tc-str">"InfoSec &amp; Zero Trust"</span>,
+    <span class="tc-str">"AI / LLM Engineering"</span>
+  ],
+  <span class="tc-key">"status"</span>:   <span class="tc-green">"available"</span>,
+  <span class="tc-key">"location"</span>: <span class="tc-str">"Russia"</span>,
+  <span class="tc-key">"open_to"</span>: [
+    <span class="tc-str">"freelance"</span>,
+    <span class="tc-str">"internship"</span>,
+    <span class="tc-str">"research"</span>
+  ]
+<span class="tc-brace">}</span><span id="tc-cursor" style="color:#63100E;animation:tc-blink 1s step-end infinite">▌</span></code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="scroll-hint" aria-hidden="true">
+        <div class="scroll-hint__line"></div>
+        <span>scroll</span>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about section section--alt" id="about">
+      <div class="container">
+        <div class="section-label">// 01 — About &amp; Focus</div>
+        <h2 class="section-title">На стыке бизнеса<br/>и инженерии</h2>
+        <div class="about__grid">
+          <div class="about__bio">
+            <p class="about__text" id="about-bio1">
+              Студент программы «Бизнес-информатика», специализирующийся на проектировании IT-решений для реального бизнеса.
+            </p>
+            <p class="about__text" id="about-bio2">
+              Мой подход — исследовать проблему количественно, декомпозировать структурно и предложить безопасное, масштабируемое решение с чётким ROI.
+            </p>
+            <div class="about__meta">
+              <div class="about__meta-item">
+                <span class="mono">Университет</span>
+                <span id="about-university">МИРЭА / НИУ ВШЭ</span>
+              </div>
+              <div class="about__meta-item">
+                <span class="mono">Программа</span>
+                <span id="about-program">Бизнес-информатика, бакалавриат</span>
+              </div>
+              <div class="about__meta-item">
+                <span class="mono">Выпуск</span>
+                <span id="about-graduation">2026</span>
+              </div>
+            </div>
+          </div>
+          <div class="about__vectors" id="about-vectors">
+            <div class="vector-card" data-delay="0">
+              <div class="vector-card__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              </div>
+              <h3 class="vector-card__title">Product Management</h3>
+              <p class="vector-card__desc">CustDev, Jobs-to-be-Done, OKR-фреймворк, roadmap-планирование, метрики продукта.</p>
+            </div>
+            <div class="vector-card" data-delay="80">
+              <div class="vector-card__icon vector-card__icon--olive">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>
+              </div>
+              <h3 class="vector-card__title">Solutions Architecture</h3>
+              <p class="vector-card__desc">Pre-Sale проектирование, C4 Model, API-first, микросервисы, enterprise-документирование.</p>
+            </div>
+            <div class="vector-card" data-delay="160">
+              <div class="vector-card__icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <h3 class="vector-card__title">Information Security</h3>
+              <p class="vector-card__desc">Zero Trust, STRIDE, MITRE ATT&amp;CK, сетевая безопасность, compliance (ISO 27001).</p>
+            </div>
+            <div class="vector-card" data-delay="240">
+              <div class="vector-card__icon vector-card__icon--olive">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+              </div>
+              <h3 class="vector-card__title">Math &amp; AI/LLM</h3>
+              <p class="vector-card__desc">RAG-пайплайны, fine-tuning, математическое моделирование, prompt engineering.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section class="skills section" id="skills">
+      <div class="container">
+        <div class="section-label">// 02 — Core Stack</div>
+        <h2 class="section-title">Инструментарий</h2>
+        <div class="skills__filters" role="tablist" aria-label="Фильтр навыков">
+          <button class="filter-btn filter-btn--active" data-filter="all"  role="tab" aria-selected="true">Все</button>
+          <button class="filter-btn" data-filter="ba"   role="tab" aria-selected="false">Бизнес-анализ</button>
+          <button class="filter-btn" data-filter="arch" role="tab" aria-selected="false">Архитектура</button>
+          <button class="filter-btn" data-filter="sec"  role="tab" aria-selected="false">ИБ &amp; Сети</button>
+          <button class="filter-btn" data-filter="ai"   role="tab" aria-selected="false">AI / LLM</button>
+          <button class="filter-btn" data-filter="dev"  role="tab" aria-selected="false">Dev &amp; Data</button>
+        </div>
+        <div class="skills__grid" id="skillsGrid" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section class="portfolio section section--alt" id="portfolio">
+      <div class="container">
+        <div class="section-label">// 03 — Portfolio &amp; Pet Projects</div>
+        <h2 class="section-title">Проекты &amp; Кейсы</h2>
+        <div class="portfolio__grid" id="portfolioGrid"></div>
+      </div>
+    </section>
+
+    <!-- SERVICES — PRICE CONSTRUCTOR -->
+    <section class="services section" id="services">
+      <div class="container">
+        <div class="section-label">// 04 — Services &amp; Pricing</div>
+        <h2 class="section-title">Конструктор стоимости</h2>
+
+        <div class="constructor">
+          <div class="constructor__steps">
+
+            <!-- Step 1: Service type -->
+            <div class="step-block active" id="step-service">
+              <div class="step-block__num">Шаг 01</div>
+              <div class="step-block__title">Направление работы</div>
+              <div class="radio-grid radio-grid--2" id="service-radio-grid">
+                <!-- filled by JS from data -->
+              </div>
+            </div>
+
+            <!-- Step 2: Scope -->
+            <div class="step-block" id="step-scope">
+              <div class="step-block__num">Шаг 02</div>
+              <div class="step-block__title">Объём и сложность</div>
+              <div class="radio-grid radio-grid--2">
+                <div class="radio-card">
+                  <input type="radio" name="scope" id="scope-small" value="small" checked />
+                  <label for="scope-small" class="radio-card__label">
+                    <span class="radio-card__name">Небольшой</span>
+                    <span class="radio-card__desc">1–2 процесса / модуля</span>
+                    <span class="radio-card__price">базовая ставка</span>
+                  </label>
+                </div>
+                <div class="radio-card">
+                  <input type="radio" name="scope" id="scope-medium" value="medium" />
+                  <label for="scope-medium" class="radio-card__label">
+                    <span class="radio-card__name">Средний</span>
+                    <span class="radio-card__desc">3–6 процессов / модулей</span>
+                    <span class="radio-card__price">× 1.8</span>
+                  </label>
+                </div>
+                <div class="radio-card">
+                  <input type="radio" name="scope" id="scope-large" value="large" />
+                  <label for="scope-large" class="radio-card__label">
+                    <span class="radio-card__name">Крупный</span>
+                    <span class="radio-card__desc">Полноценная подсистема</span>
+                    <span class="radio-card__price">× 3.2</span>
+                  </label>
+                </div>
+                <div class="radio-card">
+                  <input type="radio" name="scope" id="scope-enterprise" value="enterprise" />
+                  <label for="scope-enterprise" class="radio-card__label">
+                    <span class="radio-card__name">Enterprise</span>
+                    <span class="radio-card__desc">Комплексная система</span>
+                    <span class="radio-card__price">× 5.5</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 3: Deliverables -->
+            <div class="step-block" id="step-deliverables">
+              <div class="step-block__num">Шаг 03</div>
+              <div class="step-block__title">Артефакты и результаты</div>
+              <div class="checkbox-grid" id="deliverables-grid">
+                <div class="check-item">
+                  <input type="checkbox" id="del-report" value="report" />
+                  <label for="del-report" class="check-item__label">
+                    Технический отчёт (PDF)
+                    <span class="check-item__cost">+ 3 000 ₽</span>
+                  </label>
+                </div>
+                <div class="check-item">
+                  <input type="checkbox" id="del-presentation" value="presentation" />
+                  <label for="del-presentation" class="check-item__label">
+                    Презентация для стейкхолдеров
+                    <span class="check-item__cost">+ 4 000 ₽</span>
+                  </label>
+                </div>
+                <div class="check-item">
+                  <input type="checkbox" id="del-diagrams" value="diagrams" />
+                  <label for="del-diagrams" class="check-item__label">
+                    Архитектурные схемы (C4/UML/BPMN)
+                    <span class="check-item__cost">+ 3 500 ₽</span>
+                  </label>
+                </div>
+                <div class="check-item">
+                  <input type="checkbox" id="del-prototype" value="prototype" />
+                  <label for="del-prototype" class="check-item__label">
+                    Прототип / PoC
+                    <span class="check-item__cost">+ 8 000 ₽</span>
+                  </label>
+                </div>
+                <div class="check-item">
+                  <input type="checkbox" id="del-recommendations" value="recommendations" />
+                  <label for="del-recommendations" class="check-item__label">
+                    Рекомендации по реализации
+                    <span class="check-item__cost">+ 2 000 ₽</span>
+                  </label>
+                </div>
+                <div class="check-item">
+                  <input type="checkbox" id="del-support" value="support" />
+                  <label for="del-support" class="check-item__label">
+                    Постпроектное сопровождение (1 мес.)
+                    <span class="check-item__cost">+ 5 000 ₽</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Step 4: Timeline -->
+            <div class="step-block" id="step-timeline">
+              <div class="step-block__num">Шаг 04</div>
+              <div class="step-block__title">Срочность</div>
+              <div class="timeline-grid">
+                <div class="timeline-card">
+                  <input type="radio" name="timeline" id="tl-urgent" value="urgent" />
+                  <label for="tl-urgent" class="timeline-card__label">
+                    <span class="timeline-card__name">Срочно</span>
+                    <span class="timeline-card__mult">× 1.8</span>
+                  </label>
+                </div>
+                <div class="timeline-card">
+                  <input type="radio" name="timeline" id="tl-standard" value="standard" checked />
+                  <label for="tl-standard" class="timeline-card__label">
+                    <span class="timeline-card__name">Стандарт</span>
+                    <span class="timeline-card__mult">× 1.0</span>
+                  </label>
+                </div>
+                <div class="timeline-card">
+                  <input type="radio" name="timeline" id="tl-flexible" value="flexible" />
+                  <label for="tl-flexible" class="timeline-card__label">
+                    <span class="timeline-card__name">Гибко</span>
+                    <span class="timeline-card__mult">× 0.85</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Summary -->
+          <div class="price-summary">
+            <div class="price-summary__header">Расчётная стоимость</div>
+            <div class="price-summary__estimate" id="price-estimate">0 ₽</div>
+            <div class="price-summary__note" id="price-range-note">Выберите направление</div>
+            <div class="price-summary__breakdown" id="price-breakdown">
+              <div class="breakdown-item">
+                <span>Базовая ставка</span>
+                <span id="bd-base">—</span>
+              </div>
+              <div class="breakdown-item">
+                <span>Объём</span>
+                <span id="bd-scope">× 1.0</span>
+              </div>
+              <div class="breakdown-item">
+                <span>Артефакты</span>
+                <span id="bd-extras">+ 0 ₽</span>
+              </div>
+              <div class="breakdown-item">
+                <span>Срочность</span>
+                <span id="bd-timeline">× 1.0</span>
+              </div>
+              <div class="breakdown-item breakdown-item--total" style="margin-top:8px; padding-top:8px; border-top:1px solid var(--border-color);">
+                <span>Итого (от)</span>
+                <span id="bd-total">—</span>
+              </div>
+            </div>
+            <a href="#contact" class="btn btn--primary btn--full">
+              Обсудить проект
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <p class="price-disclaimer">
+              * Оценка ориентировочная. Финальная стоимость согласовывается после брифинга. Первая консультация — бесплатно.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact section section--alt" id="contact">
+      <div class="container">
+        <div class="section-label">// 05 — Contact</div>
+        <h2 class="section-title">Давайте обсудим<br/>вашу задачу</h2>
+        <div class="contact__grid">
+          <div>
+            <p class="contact__desc">
+              Опишите задачу в мессенджере или напишите на почту. Отвечаю в течение 24 часов.
+            </p>
+            <div class="contact__channels" id="contact-channels"></div>
+          </div>
+          <div class="contact__info-box">
+            <div class="contact__availability">
+              <div class="contact__availability-dot"></div>
+              <p id="contact-availability-text">
+                <strong>Доступен для проектов и стажировок.</strong><br/>
+                Открыт к фрилансу, исследовательской работе и долгосрочному сотрудничеству.
+              </p>
+            </div>
+            <div class="contact__tg-cta">
+              <p>Быстрее всего — через Telegram</p>
+              <a href="#" class="btn btn--primary btn--full" id="contact-tg-btn">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Написать в Telegram
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__left">
+        <span class="logo__monogram" id="footer-monogram">АМ</span>
+        <span class="text-muted mono">© <span id="footer-year">2024</span> — Solutions Architect &amp; PM</span>
+      </div>
+      <div class="footer__right">
+        <a href="/admin.html" style="color:var(--text-dim); font-size:11px;" title="Admin Panel">⚙ admin</a>
+      </div>
+    </div>
+  </footer>
+
+  <style>
+    @keyframes tc-blink { 0%,100%{opacity:1} 50%{opacity:0} }
+  </style>
+
+  <script src="main.js"></script>
+</body>
+</html>
