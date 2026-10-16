@@ -6,10 +6,23 @@ let pool;
 
 function getPool() {
   if (!pool) {
-    const connectionString = process.env.NETLIFY_DATABASE_URL || process.env.DATABASE_URL;
+    const env = process.env;
+    const connectionString =
+      env.NETLIFY_DATABASE_URL ||
+      env.DATABASE_URL ||
+      env.POSTGRES_URL ||
+      env.NETLIFY_DB_URL ||
+      env.POSTGRES_PRISMA_URL ||
+      env.POSTGRES_URL_NON_POOLING ||
+      env.NETLIFY_POSTGRES_URL ||
+      env.NEON_DATABASE_URL ||
+      (env.PGHOST && `postgres://${env.PGUSER}:${env.PGPASSWORD}@${env.PGHOST}:${env.PGPORT || 5432}/${env.PGDATABASE}`);
+
     if (!connectionString) {
-      throw new Error('Database connection string is missing. Please set NETLIFY_DATABASE_URL or DATABASE_URL in Netlify environment variables.');
+      const matchingKeys = Object.keys(env).filter(k => /DATA|POSTGRES|NETLIFY|PG/i.test(k)).join(', ');
+      throw new Error(`Database connection string is missing. Matching env vars: [${matchingKeys || 'none'}]. Please ensure Netlify Database is connected in Netlify Dashboard.`);
     }
+
     pool = new Pool({
       connectionString,
       ssl: {
@@ -53,7 +66,7 @@ exports.handler = async (event) => {
       CREATE TABLE IF NOT EXISTS portfolio_content (
         id VARCHAR(32) PRIMARY KEY,
         data JSONB NOT NULL,
-        updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+        updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
@@ -64,17 +77,16 @@ exports.handler = async (event) => {
         ['main']
       );
 
-      // An empty object means the row was seeded but never saved from the admin panel
       const row = result.rows[0];
       if (row && row.data && Object.keys(row.data).length > 0) {
         return {
           statusCode: 200,
           headers,
-          body: JSON.stringify(result.rows[0].data)
+          body: JSON.stringify(row.data)
         };
       }
 
-      // If table is newly created / empty, serve default content
+      // If empty or newly seeded, serve default content
       const defaultData = getDefaultContent() || {};
       if (row) {
         return {
@@ -83,8 +95,11 @@ exports.handler = async (event) => {
           body: JSON.stringify(defaultData)
         };
       }
+
       await client.query(
-        'INSERT INTO portfolio_content (id, data, updated_at) VALUES ($1, $2, NOW()) ON CONFLICT (id) DO NOTHING',
+        `INSERT INTO portfolio_content (id, data, updated_at)
+         VALUES ($1, $2::jsonb, NOW())
+         ON CONFLICT (id) DO NOTHING`,
         ['main', JSON.stringify(defaultData)]
       );
 
@@ -101,7 +116,7 @@ exports.handler = async (event) => {
 
       await client.query(
         `INSERT INTO portfolio_content (id, data, updated_at)
-         VALUES ($1, $2, NOW())
+         VALUES ($1, $2::jsonb, NOW())
          ON CONFLICT (id) DO UPDATE
          SET data = EXCLUDED.data, updated_at = NOW()`,
         ['main', JSON.stringify(payload)]
@@ -110,7 +125,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ success: true, message: 'Saved successfully' })
+        body: JSON.stringify({ success: true, message: 'Saved successfully to Netlify Database' })
       };
     }
 
@@ -138,8 +153,8 @@ exports.handler = async (event) => {
       statusCode: 500,
       headers,
       body: JSON.stringify({
-        error: error.message || 'Database connection error',
-        hint: 'Make sure Netlify Database is connected and NETLIFY_DATABASE_URL is set in Site Configuration -> Environment Variables'
+        error: error.message || 'Database error',
+        hint: 'Check Netlify Database connection'
       })
     };
   }

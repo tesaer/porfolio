@@ -108,7 +108,17 @@ async function saveData() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data, null, 2),
     });
-    if (!res.ok) throw new Error('Server error ' + res.status);
+    if (!res.ok) {
+      let msg = 'Server error ' + res.status;
+      try {
+        const errData = await res.json();
+        if (errData && errData.error) {
+          msg = errData.error;
+          if (errData.hint) msg += ' (' + errData.hint + ')';
+        }
+      } catch (_) {}
+      throw new Error(msg);
+    }
     setStatus('✓ Сохранено', 'ok');
     setTimeout(() => setStatus(''), 3000);
   } catch (err) {
